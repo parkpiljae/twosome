@@ -1,56 +1,66 @@
-<!-- Always shows a header, even in smaller screens. -->
-<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-  <header class="mdl-layout__header">
-    <div class="mdl-layout__header-row">
-      <!-- Title -->
-      <span class="mdl-layout-title">Title</span>
-      <!-- Add spacer, to align navigation to the right -->
-      <div class="mdl-layout-spacer"></div>
-      <!-- Navigation. We hide it in small screens. -->
-      <nav class="mdl-navigation mdl-layout--large-screen-only">
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
-        <a class="mdl-navigation__link" href="">Link</a>
-      </nav>
+<div class="contianer">
+  <div class="col-md-4">
+    
+    <div id="right">
+      <% @calcul.each do |i|%>
+      <%= i.food%>
+      <%= i.price%> <a href="home/des/<%= i.id%>">[삭제]</a><br>
+      
+      <% end %>
     </div>
-  </header>
-  <div class="mdl-layout__drawer">
-    <span class="mdl-layout-title">Title</span>
-    <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-    </nav>
+    <span id = "center">
+     
+     <%= @appp %>
+    </span>
+    원
   </div>
-  <main class="mdl-layout__content">
-    <div class="page-content">
-		<div class="mdl-grid">
-  			<div class="mdl-cell mdl-cell--4-col">
 
-  		
-  			</div>
-  			
-  			<div class="mdl-cell mdl-cell--8-col">
-  			 	<div class="mdl-grid">
-  			 		<% @food_espresso.each do |t|%>
-						<div class="mdl-cell mdl-cell--3-col">
-							<div class ="menu">
-								<form action="#">
-									<p><%= t.food%></p>
-									regular <%= t.price%> 원 <input type="number" min =0 ></br>
-									large <%= t.price + 500%> 원<input type="number" min =0 ></br>
-									<button type="submit" value="<%= t.id%>" class="add_menu">추가하기</button>
-								</form>
-								
-							</div>
-						</div>
-					<%end%>
-				</div>
-  			</div>
-		</div>
-    </div>
-  </main>
+  <div class="col-md-8">
+    <% @food_espresso.each do |t|%>
+      <div class="col-md-3">
+        <div class ="menu">
 
+          <form action="home/cal_total" method = "post">
+              <div id = "food_<%= t.id%>" value="<%= t.food%>"><%= t.food%></div>
+            regular <span id = "price_<%= t.id%>"><%= t.price%></span> 원 <input type="number" min =0 ></br>
+            large <%= t.price + 500%> 원<input type="number" min =0 ></br>
+            <button type="submit" value="<%= t.id%>" class="add_menu">추가하기</button>
+            <div  value="<%= t.price%>"></div>
+            <input type="hidden" value = "<%= t.food%>" name= "food_val">
+
+            <input type="hidden" value = "<%= t.price%>" name= "price_val">
+          </form>
+          
+        </div>
+      </div>
+    <%end%>
+  </div>
 </div>
+
+<script>
+/*$(document).ready(function(){
+  $( ".add_menu" ).click(function() {
+    menu_id = this.value;
+    food = "#"+ "food_" + menu_id 
+    food_val = $(food).text();
+    price = "#" + "price_" + menu_id
+    price_val = $(price).text();
+    $.ajax({
+      method: "POST",
+      url: "/home/cal_total",
+      data: { food_val: food_val, price_val : price_val}
+    })
+      .done(function() {
+        $( "#right" ).append( "<span id ="+ "\"" + menu_id + "\">" +food_val + " ");
+        $( "#right" ).append( price_val+"</span>"+ "<br>" );
+    
+      var sum = parseInt( $("#center").text());
+      sum = parseInt(price_val) + parseInt(sum);
+      var center= document.getElementById("center");
+      center.innerHTML = sum;
+        });
+  });
+});
+*/
+  
+</script>

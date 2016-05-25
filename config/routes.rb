@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   root 'home#index'
+  post 'home/cal_total' => 'home#cal_total'
+  get 'home/des/:food_id' => "home#des"  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
