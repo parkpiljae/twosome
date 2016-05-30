@@ -20,9 +20,9 @@ Twomenu.create(food: '키위 바나나 주스', price:  5500 ,category: 'beverag
 
 #커피&음료 -> 에스프레소
 
-Twomenu.create(food: '플랫 화이트', price:  4800 ,category: 'espresso')
-Twomenu.create(food: '화이트 클라우드 라떼', price:  4900 ,category: 'espresso')
-Twomenu.create(food: '롱블랙', price:  4100 ,category: 'espresso')
+Twomenu.create(food: '플랫화이트', price:  4800 ,category: 'espresso')
+Twomenu.create(food: '화이트클라우드라떼', price:  4900 ,category: 'espresso')
+Twomenu.create(food: '롱블', price:  4100 ,category: 'espresso')
 Twomenu.create(food: '아이스 롱블랙', price:  4100 ,category: 'espresso')
 Twomenu.create(food: '숏라떼', price:  4400 ,category: 'espresso')
 Twomenu.create(food: '아이스 숏라떼', price:  4400 ,category: 'espresso')

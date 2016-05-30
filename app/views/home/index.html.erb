@@ -1,40 +1,136 @@
+
 <div class="contianer">
-  <div class="col-md-4">
-    
-    <div id="right">
-      <% @calcul.each do |i|%>
-      <%= i.food%>
-      <%= i.price%> <a href="home/des/<%= i.id%>">[삭제]</a><br>
-      
-      <% end %>
-    </div>
-    <span id = "center">
-     
-     <%= @appp %>
-    </span>
-    원
-  </div>
-
-  <div class="col-md-8">
-    <% @food_espresso.each do |t|%>
-      <div class="col-md-3">
-        <div class ="menu">
-
-          <form action="home/cal_total" method = "post">
-              <div id = "food_<%= t.id%>" value="<%= t.food%>"><%= t.food%></div>
-            regular <span id = "price_<%= t.id%>"><%= t.price%></span> 원 <input type="number" min =0 ></br>
-            large <%= t.price + 500%> 원<input type="number" min =0 ></br>
-            <button type="submit" value="<%= t.id%>" class="add_menu">추가하기</button>
-            <div  value="<%= t.price%>"></div>
-            <input type="hidden" value = "<%= t.food%>" name= "food_val">
-
-            <input type="hidden" value = "<%= t.price%>" name= "price_val">
-          </form>
-          
+    <!-- 네비바 시작 -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="col-md-4">    
+        <a class="navbar-brand" href="?category=espresso">Twosome POS</a>
+  
         </div>
-      </div>
-    <%end%>
-  </div>
+        <div class="col-md-5">
+        <ul class="nav nav-tabs">
+            
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    커피 & 음료 <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li role="presentation"><a href="?category=beverage">음료</a></li>
+                    <li role="presentation"><a href="?category=espresso">에스프레소</a></li>
+                    <li role="presentation"><a href="?category=blendedfrappe">블렌디드 프라페</a></li>
+                    <li role="presentation"><a href="?category=teavariation">티 베리에이션</a></li>
+                </ul>
+            </li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    케이크 <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li role="presentation"><a href="?category=moussecake">무스케이크</a></li>
+                    <li role="presentation"><a href="?category=whippedcream">생크림케이크</a></li>
+                    <li role="presentation"><a href="?category=2016familymonth">2016가정의달</a></li>
+                    
+                </ul>
+            </li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  디저트 <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li role="presentation"><a href="?category=dessert">디저트</a></li>
+                    <li role="presentation"><a href="?category=chocolate">초콜릿</a></li>
+                    <li role="presentation"><a href="?category=icecream">아이스크림</a></li>
+                    <li role="presentation"><a href="?category=bingsu">빙수</a></li>
+                </ul>
+            </li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  델리<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li role="presentation"><a href="?category=sandwich">샌드위치</a></li>
+                    <li role="presentation"><a href="?category=salad">샐러드</a></li>
+                    <li role="presentation"><a href="?category=bakery">베이커리</a></li>
+                    <li role="presentation"><a href="?category=setmenu">세트메뉴</a></li>
+                </ul>
+            </li>
+             <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                    MD <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li role="presentation"><a href="?category=coffee bean">원두커피</a></li>
+                    <li role="presentation"><a href="?category=md">MD</a></li>
+                    <li role="presentation"><a href="?category=giftset">선물세트</a></li>
+                </ul>
+            </li>
+        </ul>
+        </div>
+        <div class= "col-md-3">
+            <form class="navbar-form navbar-left" role="search" action="" >
+                <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search" name="search">
+                </div>
+                <button type="submit" class="btn btn-default">검색</button>
+            </form>          
+        </div>
+    </nav>
+    <!-- 네비바 끝-->
+    <!-- 바디시작-->
+    <article style = "margin-top: 70px">
+        <!-- 왼쪽 계산판 시-->
+        <div class="col-md-4">
+            <div class="col-md-5">
+                <% @unique_activities.each do |t|%>
+                <%= t%></br>
+                <%end%> 
+            </div>
+            <div class="col-md-2">
+                <% @count_each.each do |t|%>
+                <%= t%></br>
+                <%end%>
+            </div>
+            <div class="col-md-2">
+                <% @unique_activities.each do |t|%>
+                    <form action="home/del" method = "post">
+                        <input type="hidden" value = "<%= t%>" name= "name">
+                         <button type="submit" value="<%= t%>" class="add_menu">
+                            빼
+                        </button>
+                    </form>
+                <%end%> 
+            </div>
+            <div class="col-md-3">
+                <% @price_each.each do |t|%>
+                <%= t%></br>
+                <%end%> 
+            </div>
+            <h1>Total : <%= @total_sum %> 원 </h1>          
+        </div>
+        <!-- 왼쪽 계산판 끝-->
+        <!-- 오른쪽 메뉴판 시작 -->
+        <div class="col-md-8">
+            <% @results.each do |t|%>
+                <div class="col-md-3">
+                <div class ="menu">
+                    <form action="home/cal_total" method = "post">
+                        <input type="hidden" value = "<%= t.food%>" name= "food_val">
+                        <input type="hidden" value = "<%= t.price%>" name= "price_val">
+                        <%= t.food%></br>
+                        regular : <%= t.price%> 원  
+                            <input type="number" id="replyNumber" min="0" step="1" data-bind="value:replyNumber" /></br>
+                        large  : <%= t.price + 500%> 원
+                            <input type="number" min =0 ></br>
+                        <button type="submit" value="<%= t.id%>" class="add_menu">
+                            추가하기
+                        </button>
+                        
+                    </form>
+                </div>
+                </div>
+            <%end%>
+        </div>
+        <!-- 오른쪽 메뉴판 끝 -->
+    </article>
 </div>
 
 <script>
@@ -62,5 +158,4 @@
   });
 });
 */
-  
 </script>
