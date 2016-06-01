@@ -42,10 +42,11 @@ class HomeController < ApplicationController
   	redirect_to :back
   end
 
-  def des
-  	Calcul.find(params[:food_id]).destroy.save
-  	redirect_to :back
-  end
+ def add
+    f_v = Calcul.where(food: params[:name]).first.price
+    Calcul.create(food: params[:name], price: f_v)
+    redirect_to :back
+ end
 
   def del
   	Calcul.where(food: params[:name]).last.destroy.save

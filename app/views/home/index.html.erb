@@ -84,27 +84,38 @@
                 <%= t%></br>
                 <%end%> 
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
                 <% @count_each.each do |t|%>
                 <%= t%></br>
                 <%end%>
             </div>
             <div class="col-md-2">
                 <% @unique_activities.each do |t|%>
-                    <form action="home/del" method = "post">
+                    <form action="/dell" method = "post">
                         <input type="hidden" value = "<%= t%>" name= "name">
                          <button type="submit" value="<%= t%>" class="add_menu">
-                            빼
+                            -
+                        </button>
+                    </form>
+                <%end%>
+            </div>
+            <div class="col-md-2">
+                <% @unique_activities.each do |t|%>
+                     <form action="/add" method = "post">
+                        <input type="hidden" value = "<%= t%>" name= "name">
+                         <button type="submit" value="<%= t%>" class="add_menu">
+                            +
                         </button>
                     </form>
                 <%end%> 
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <% @price_each.each do |t|%>
                 <%= t%></br>
                 <%end%> 
             </div>
-            <h1>Total : <%= @total_sum %> 원 </h1>          
+            <h1>Total : <%= @total_sum %> 원 </h1> 
+                     
         </div>
         <!-- 왼쪽 계산판 끝-->
         <!-- 오른쪽 메뉴판 시작 -->
@@ -117,9 +128,9 @@
                         <input type="hidden" value = "<%= t.price%>" name= "price_val">
                         <%= t.food%></br>
                         regular : <%= t.price%> 원  
-                            <input type="number" id="replyNumber" min="0" step="1" data-bind="value:replyNumber" /></br>
+                           <input type="radio" value = "<%= t.price%>" name= "price_val"> </br>
                         large  : <%= t.price + 500%> 원
-                            <input type="number" min =0 ></br>
+                            <input type="radio" value = "<%= t.price+500%>" name= "price_val"></br>
                         <button type="submit" value="<%= t.id%>" class="add_menu">
                             추가하기
                         </button>
